@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DMO前期会計管理</title>
+  <title>DMO会計管理</title>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -282,6 +282,10 @@
         <input type="date" id="expenseDate">
       </div>
       <div class="form-group">
+        <label class="form-label">負担者</label>
+        <select id="expensePerson"><option value="">未設定</option></select>
+      </div>
+      <div class="form-group">
         <label class="form-label">金額（円）*</label>
         <input type="number" id="expenseAmount" min="0" step="1" placeholder="0">
       </div>
@@ -542,6 +546,10 @@ function catName(id) {
   const c = state.categories.find(c => c.id === id);
   return c ? c.name : '未分類';
 }
+function personName(id) {
+  const p = state.people.find(p => p.id === id);
+  return p ? p.name : null;
+}
 
 function editCategory(id) {
   editingCategoryId = id;
@@ -578,6 +586,9 @@ function openExpenseModal(id) {
   const sel = document.getElementById('expenseCategory');
   sel.innerHTML = '<option value="">未分類</option>' +
     state.categories.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('');
+  const psel = document.getElementById('expensePerson');
+  psel.innerHTML = '<option value="">未設定</option>' +
+    state.people.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('');
   if (id) {
     const e = state.expenses.find(e => e.id === id);
     if (e) {
@@ -585,6 +596,7 @@ function openExpenseModal(id) {
       document.getElementById('expenseAmount').value = e.amount || '';
       document.getElementById('expenseDate').value = e.date || '';
       sel.value = e.categoryId || '';
+      psel.value = e.personId || '';
     }
   }
   document.getElementById('expenseModal').style.display = 'flex';
@@ -600,13 +612,14 @@ function saveExpense() {
   const name = document.getElementById('expenseName').value.trim();
   if (!name) { alert('項目名を入力してください'); return; }
   const categoryId = document.getElementById('expenseCategory').value;
+  const personId = document.getElementById('expensePerson').value;
   const date = document.getElementById('expenseDate').value;
   const amount = parseFloat(document.getElementById('expenseAmount').value) || 0;
   if (editingExpenseId) {
     const e = state.expenses.find(e => e.id === editingExpenseId);
-    if (e) Object.assign(e, { name, categoryId, date, amount });
+    if (e) Object.assign(e, { name, categoryId, personId, date, amount });
   } else {
-    state.expenses.push({ id: uid(), name, categoryId, date, amount });
+    state.expenses.push({ id: uid(), name, categoryId, personId, date, amount });
   }
   save();
   closeExpenseModal();
@@ -665,25 +678,29 @@ function renderExpenseTable() {
   container.innerHTML = `
     <table>
       <thead><tr>
-        <th class="hide-mobile">日付</th><th>項目名</th><th>カテゴリ</th>
+        <th class="hide-mobile">日付</th><th>項目名</th><th>カテゴリ</th><th>負担者</th>
         <th style="text-align:right">金額</th><th></th>
       </tr></thead>
-      <tbody>${sorted.map(e => `
+      <tbody>${sorted.map(e => {
+        const pname = e.personId ? personName(e.personId) : null;
+        return `
         <tr>
           <td class="hide-mobile" style="color:#aaa;font-size:12px;white-space:nowrap">${e.date || '—'}</td>
           <td style="font-weight:500">${esc(e.name)}</td>
           <td>${e.categoryId
             ? `<span class="badge"><span class="cat-dot" style="background:${catColor(e.categoryId)}"></span>${esc(catName(e.categoryId))}</span>`
             : '<span style="color:#ddd;font-size:12px">—</span>'}</td>
+          <td>${pname ? `<span style="font-size:13px;color:#555">${esc(pname)}</span>` : '<span style="color:#ddd;font-size:12px">—</span>'}</td>
           <td class="amount-cell">${fmt(e.amount)}</td>
           <td class="actions-cell">
             <button class="btn-icon" onclick="openExpenseModal('${e.id}')" title="編集">✏</button>
             <button class="btn-icon" onclick="deleteExpense('${e.id}')" title="削除">🗑</button>
           </td>
-        </tr>`).join('')}
+        </tr>`;
+      }).join('')}
       </tbody>
       <tfoot><tr>
-        <td class="hide-mobile"></td><td colspan="2" style="font-weight:700">合計</td>
+        <td class="hide-mobile"></td><td colspan="3" style="font-weight:700">合計</td>
         <td class="amount-cell">${fmt(grand)}</td><td></td>
       </tr></tfoot>
     </table>
