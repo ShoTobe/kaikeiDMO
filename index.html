@@ -14,6 +14,23 @@
       min-height: 100vh;
     }
 
+    .setup-banner {
+      background: #fff8e1;
+      border-bottom: 2px solid #ffc107;
+      padding: 14px 24px;
+      font-size: 13px;
+      line-height: 1.8;
+    }
+    .setup-banner b { color: #e65100; }
+    .setup-banner code {
+      background: rgba(0,0,0,0.07);
+      padding: 1px 5px;
+      border-radius: 3px;
+      font-family: monospace;
+      font-size: 12px;
+    }
+    .setup-banner ol { padding-left: 20px; margin-top: 4px; }
+
     header {
       background: #1a1a2e;
       color: white;
@@ -27,20 +44,23 @@
       z-index: 100;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    header h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.02em; }
+    header h1 { font-size: 18px; font-weight: 700; letter-spacing: 0.02em; display: flex; align-items: center; gap: 8px; }
+
+    .sync-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: #27ae60;
+      flex-shrink: 0;
+    }
+    .sync-dot.connecting { background: #f39c12; }
+    .sync-dot.error { background: #e74c3c; }
 
     .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 16px;
-      border: none;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: inherit;
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 16px; border: none; border-radius: 6px;
+      font-size: 14px; font-weight: 500; cursor: pointer;
+      transition: all 0.15s; font-family: inherit;
     }
     .btn-primary { background: #3498db; color: white; }
     .btn-primary:hover { background: #2980b9; }
@@ -52,14 +72,9 @@
     .btn-ghost:hover { background: rgba(255,255,255,0.1); color: white; }
     .btn-sm { padding: 6px 12px; font-size: 13px; }
     .btn-icon {
-      padding: 5px 7px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      color: #999;
-      border-radius: 4px;
-      transition: background 0.15s;
-      font-size: 14px;
+      padding: 5px 7px; background: none; border: none;
+      cursor: pointer; color: #999; border-radius: 4px;
+      transition: background 0.15s; font-size: 14px;
     }
     .btn-icon:hover { background: #f0f0f0; color: #333; }
 
@@ -68,8 +83,7 @@
     .summary-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 12px;
-      margin-bottom: 20px;
+      gap: 12px; margin-bottom: 20px;
     }
     .summary-card { background: white; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
     .summary-label { font-size: 12px; color: #888; margin-bottom: 6px; }
@@ -77,25 +91,14 @@
     .summary-value small { font-size: 13px; color: #888; font-family: sans-serif; font-weight: 400; }
 
     .tabs {
-      display: flex;
-      background: white;
-      border-radius: 8px;
-      padding: 4px;
-      margin-bottom: 20px;
+      display: flex; background: white; border-radius: 8px;
+      padding: 4px; margin-bottom: 20px;
       box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     .tab-btn {
-      flex: 1;
-      padding: 9px;
-      border: none;
-      background: none;
-      border-radius: 6px;
-      font-size: 14px;
-      font-weight: 500;
-      color: #666;
-      cursor: pointer;
-      transition: all 0.15s;
-      font-family: inherit;
+      flex: 1; padding: 9px; border: none; background: none;
+      border-radius: 6px; font-size: 14px; font-weight: 500;
+      color: #666; cursor: pointer; transition: all 0.15s; font-family: inherit;
     }
     .tab-btn.active { background: #1a1a2e; color: white; }
 
@@ -105,14 +108,9 @@
 
     table { width: 100%; border-collapse: collapse; font-size: 14px; }
     th {
-      text-align: left;
-      padding: 9px 12px;
-      color: #999;
-      font-weight: 500;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 0.06em;
-      border-bottom: 1px solid #f0f0f0;
+      text-align: left; padding: 9px 12px; color: #999;
+      font-weight: 500; font-size: 11px; text-transform: uppercase;
+      letter-spacing: 0.06em; border-bottom: 1px solid #f0f0f0;
     }
     td { padding: 11px 12px; border-bottom: 1px solid #f8f8f8; vertical-align: middle; }
     tr:last-child td { border-bottom: none; }
@@ -122,15 +120,9 @@
     .actions-cell { text-align: right; white-space: nowrap; }
 
     .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-      padding: 2px 8px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 500;
-      background: #e8f4fd;
-      color: #2980b9;
+      display: inline-flex; align-items: center; gap: 4px;
+      padding: 2px 8px; border-radius: 20px; font-size: 11px;
+      font-weight: 500; background: #e8f4fd; color: #2980b9;
     }
     .cat-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
 
@@ -139,91 +131,55 @@
     .empty-state p { font-size: 14px; margin-top: 8px; }
 
     .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.45);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 1000;
-      padding: 16px;
+      position: fixed; inset: 0; background: rgba(0,0,0,0.45);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 1000; padding: 16px;
     }
     .modal {
-      background: white;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 520px;
-      max-height: 90vh;
-      overflow-y: auto;
+      background: white; border-radius: 12px; width: 100%;
+      max-width: 520px; max-height: 90vh; overflow-y: auto;
       box-shadow: 0 20px 60px rgba(0,0,0,0.3);
     }
     .modal-header {
-      padding: 20px 24px 16px;
-      border-bottom: 1px solid #f0f0f0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      background: white;
-      z-index: 1;
+      padding: 20px 24px 16px; border-bottom: 1px solid #f0f0f0;
+      display: flex; justify-content: space-between; align-items: center;
+      position: sticky; top: 0; background: white; z-index: 1;
     }
     .modal-header h2 { font-size: 17px; font-weight: 600; }
     .modal-body { padding: 20px 24px; }
     .modal-footer {
-      padding: 14px 24px;
-      border-top: 1px solid #f0f0f0;
-      display: flex;
-      justify-content: flex-end;
-      gap: 8px;
-      position: sticky;
-      bottom: 0;
-      background: white;
+      padding: 14px 24px; border-top: 1px solid #f0f0f0;
+      display: flex; justify-content: flex-end; gap: 8px;
+      position: sticky; bottom: 0; background: white;
     }
+    .modal-footer-split { justify-content: space-between; }
 
     .form-group { margin-bottom: 16px; }
     .form-label { display: block; font-size: 13px; font-weight: 500; color: #555; margin-bottom: 6px; }
     input[type="text"], input[type="number"], input[type="date"], select {
-      width: 100%;
-      padding: 9px 12px;
-      border: 1.5px solid #e0e0e0;
-      border-radius: 6px;
-      font-size: 14px;
-      transition: border-color 0.15s;
-      font-family: inherit;
-      background: white;
+      width: 100%; padding: 9px 12px; border: 1.5px solid #e0e0e0;
+      border-radius: 6px; font-size: 14px; transition: border-color 0.15s;
+      font-family: inherit; background: white;
     }
     input:focus, select:focus { outline: none; border-color: #3498db; }
 
-
     .settings-section { margin-bottom: 24px; }
-    .settings-section h3 { font-size: 13px; font-weight: 600; color: #888; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+    .settings-section h3 {
+      font-size: 13px; font-weight: 600; color: #888;
+      text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px;
+    }
     .tag-list { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 10px; min-height: 24px; }
     .tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      padding: 4px 10px;
-      background: #f0f0f0;
-      border-radius: 20px;
-      font-size: 13px;
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; background: #f0f0f0; border-radius: 20px; font-size: 13px;
     }
     .tag button { background: none; border: none; cursor: pointer; color: #aaa; padding: 0; font-size: 15px; line-height: 1; }
     .tag button:hover { color: #333; }
     .tag button.del:hover { color: #e74c3c; }
-    .tag-editing {
-      background: white;
-      border: 1.5px solid #3498db;
-      padding: 2px 6px;
-    }
+    .tag-editing { background: white; border: 1.5px solid #3498db; padding: 2px 6px; }
     .tag-editing input {
-      border: none;
-      background: none;
-      font-size: 13px;
-      font-family: inherit;
-      outline: none;
-      width: 90px;
-      padding: 2px 2px;
+      border: none; background: none; font-size: 13px;
+      font-family: inherit; outline: none; width: 90px; padding: 2px;
     }
     .tag-editing button { color: #3498db; font-size: 13px; }
     .tag-editing button.del { color: #aaa; }
@@ -246,8 +202,21 @@
 </head>
 <body>
 
+<div id="setupBanner" style="display:none" class="setup-banner">
+  <b>Firebase の設定が必要です（現在はこの端末のみ保存）。</b>
+  <ol>
+    <li>console.firebase.google.com でプロジェクトを作成</li>
+    <li>Realtime Database を作成（テストモードで開始）</li>
+    <li>プロジェクトの設定 → ウェブアプリを追加 → 設定オブジェクトをコピー</li>
+    <li><code>index.html</code> の <code>FIREBASE_CONFIG</code> に貼り付け</li>
+  </ol>
+</div>
+
 <header>
-  <h1>会計管理</h1>
+  <h1>
+    <span id="syncDot" class="sync-dot" style="display:none" title="同期状態"></span>
+    会計管理
+  </h1>
   <button class="btn btn-ghost btn-sm" onclick="openSettings()">設定</button>
 </header>
 
@@ -258,7 +227,7 @@
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('expenses')">経費一覧</button>
     <button class="tab-btn" onclick="switchTab('categories')">カテゴリ別集計</button>
-    <button class="tab-btn" onclick="switchTab('people')">人別集計</button>
+    <button class="tab-btn" onclick="switchTab('people')">メンバー</button>
   </div>
 
   <div class="tab-panel active" id="tab-expenses">
@@ -283,16 +252,10 @@
   <div class="tab-panel" id="tab-people">
     <div class="card">
       <div class="card-header">
-        <span class="card-title">人別合計</span>
+        <span class="card-title">メンバー</span>
+        <button class="btn btn-primary btn-sm" onclick="openPersonModal(null)">+ 追加</button>
       </div>
-      <div id="peopleSummaryContainer"></div>
-    </div>
-    <div class="card">
-      <div class="card-header">
-        <span class="card-title">徴収履歴</span>
-        <button class="btn btn-primary btn-sm" onclick="openChargeModal()">+ 追加</button>
-      </div>
-      <div id="chargeListContainer"></div>
+      <div id="peopleTableContainer"></div>
     </div>
   </div>
 
@@ -312,9 +275,7 @@
       </div>
       <div class="form-group">
         <label class="form-label">カテゴリ</label>
-        <select id="expenseCategory">
-          <option value="">未分類</option>
-        </select>
+        <select id="expenseCategory"><option value="">未分類</option></select>
       </div>
       <div class="form-group">
         <label class="form-label">日付</label>
@@ -332,34 +293,31 @@
   </div>
 </div>
 
-<!-- Charge Modal -->
-<div class="modal-overlay" id="chargeModal" style="display:none">
+<!-- Person Modal -->
+<div class="modal-overlay" id="personModal" style="display:none">
   <div class="modal">
     <div class="modal-header">
-      <h2 id="chargeModalTitle">徴収額を追加</h2>
-      <button class="btn-icon" onclick="closeChargeModal()">✕</button>
+      <h2 id="personModalTitle">メンバーを追加</h2>
+      <button class="btn-icon" onclick="closePersonModal()">✕</button>
     </div>
     <div class="modal-body">
       <div class="form-group">
-        <label class="form-label">メンバー *</label>
-        <select id="chargePersonId"></select>
+        <label class="form-label">名前 *</label>
+        <input type="text" id="personName" placeholder="例: 山田">
       </div>
       <div class="form-group">
-        <label class="form-label">金額（円）*</label>
-        <input type="number" id="chargeAmount" min="0" step="1" placeholder="0">
-      </div>
-      <div class="form-group">
-        <label class="form-label">内容（任意）</label>
-        <input type="text" id="chargeLabel" placeholder="例: 4月分">
-      </div>
-      <div class="form-group">
-        <label class="form-label">日付</label>
-        <input type="date" id="chargeDate">
+        <label class="form-label">徴収額（円）</label>
+        <input type="number" id="personAmount" min="0" step="1" placeholder="0">
       </div>
     </div>
-    <div class="modal-footer">
-      <button class="btn btn-secondary" onclick="closeChargeModal()">キャンセル</button>
-      <button class="btn btn-primary" onclick="saveCharge()">保存</button>
+    <div class="modal-footer modal-footer-split">
+      <div>
+        <button class="btn btn-danger btn-sm" id="personDeleteBtn" onclick="deletePerson()" style="display:none">削除</button>
+      </div>
+      <div style="display:flex; gap:8px">
+        <button class="btn btn-secondary" onclick="closePersonModal()">キャンセル</button>
+        <button class="btn btn-primary" onclick="savePerson()">保存</button>
+      </div>
     </div>
   </div>
 </div>
@@ -372,17 +330,6 @@
       <button class="btn-icon" onclick="closeSettings()">✕</button>
     </div>
     <div class="modal-body">
-
-      <div class="settings-section">
-        <h3>メンバー</h3>
-        <div class="tag-list" id="peopleTagList"></div>
-        <div class="inline-add">
-          <input type="text" id="newPersonName" placeholder="名前を入力"
-            onkeydown="if(event.key==='Enter') addPerson()">
-          <button class="btn btn-primary btn-sm" onclick="addPerson()">追加</button>
-        </div>
-      </div>
-
       <div class="settings-section">
         <h3>カテゴリ</h3>
         <div class="tag-list" id="categoryTagList"></div>
@@ -392,7 +339,6 @@
           <button class="btn btn-primary btn-sm" onclick="addCategory()">追加</button>
         </div>
       </div>
-
       <div class="settings-section">
         <h3>データ管理</h3>
         <div style="display:flex; gap:8px; flex-wrap:wrap;">
@@ -402,7 +348,6 @@
           <button class="btn btn-danger btn-sm" onclick="clearAllData()">全データ削除</button>
         </div>
       </div>
-
     </div>
     <div class="modal-footer">
       <button class="btn btn-primary" onclick="closeSettings()">閉じる</button>
@@ -410,26 +355,111 @@
   </div>
 </div>
 
+<!-- Firebase SDK (compat) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
 <script>
-const STORAGE_KEY = 'kaikei_v1';
+// ===== Firebase 設定 =====
+// Firebase コンソール → プロジェクトの設定 → ウェブアプリ から取得した値を貼り付けてください
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyA2u57VpGJE0Wz8d4oY9Wl5iBNR06o64Qc",
+  authDomain: "kaikeikanri.firebaseapp.com",
+  databaseURL: "https://kaikeikanri-default-rtdb.firebaseio.com",
+  projectId: "kaikeikanri",
+  storageBucket: "kaikeikanri.firebasestorage.app",
+  messagingSenderId: "999938866846",
+  appId: "1:999938866846:web:e50f53f9de04c1e84b058f"
+};
+// =========================
+
+const STORAGE_KEY = 'kaikei_v2';
+const DB_PATH = 'kaikei';
 const CAT_COLORS = ['#3498db','#2ecc71','#e67e22','#9b59b6','#e74c3c','#1abc9c','#f39c12','#16a085'];
 
-let state = { people: [], categories: [], expenses: [], charges: [], collected: [] };
-let editingId = null;
+// state.people: [{id, name, amount, collected}]
+// state.categories: [{id, name}]
+// state.expenses: [{id, name, categoryId, date, amount}]
+let state = { people: [], categories: [], expenses: [] };
+let db = null;
+let editingExpenseId = null;
 let editingPersonId = null;
 let editingCategoryId = null;
 
-// ---------- persistence ----------
+// ---------- Firebase / persistence ----------
 
-function load() {
+function initFirebase() {
+  if (!FIREBASE_CONFIG.databaseURL) {
+    document.getElementById('setupBanner').style.display = 'block';
+    loadLocal();
+    render();
+    return;
+  }
   try {
-    const s = localStorage.getItem(STORAGE_KEY);
-    if (s) state = JSON.parse(s);
-  } catch(e) {}
+    firebase.initializeApp(FIREBASE_CONFIG);
+    db = firebase.database();
+
+    const dot = document.getElementById('syncDot');
+    dot.style.display = 'inline-block';
+    dot.classList.add('connecting');
+    dot.title = '接続中...';
+
+    db.ref(DB_PATH).on('value', snapshot => {
+      const data = snapshot.val();
+      if (data) state = normalize(data);
+      dot.className = 'sync-dot';
+      dot.title = '同期済み';
+      render();
+    }, () => {
+      dot.className = 'sync-dot error';
+      dot.title = '同期エラー';
+    });
+  } catch (e) {
+    console.error(e);
+    document.getElementById('setupBanner').style.display = 'block';
+    loadLocal();
+    render();
+  }
+}
+
+function normalize(data) {
+  const s = { ...data };
+  if (!Array.isArray(s.people)) s.people = [];
+  if (!Array.isArray(s.categories)) s.categories = [];
+  if (!Array.isArray(s.expenses)) s.expenses = [];
+
+  // migrate from old format (charges/collected arrays)
+  if (Array.isArray(s.charges) || Array.isArray(s.collected)) {
+    const sums = {};
+    (s.charges || []).forEach(c => { sums[c.personId] = (sums[c.personId] || 0) + (c.amount || 0); });
+    const doneIds = s.collected || [];
+    s.people = s.people.map(p => ({
+      id: p.id, name: p.name,
+      amount: p.amount !== undefined ? p.amount : (sums[p.id] || 0),
+      collected: p.collected !== undefined ? p.collected : doneIds.includes(p.id)
+    }));
+    delete s.charges;
+    delete s.collected;
+  }
+
+  s.people = s.people.map(p => ({ ...p, amount: p.amount || 0, collected: !!p.collected }));
+  return s;
+}
+
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('kaikei_v1');
+    if (raw) state = normalize(JSON.parse(raw));
+  } catch (e) {}
 }
 
 function save() {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  if (db) {
+    db.ref(DB_PATH).set(state);
+  } else {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    render();
+  }
 }
 
 function uid() {
@@ -438,27 +468,50 @@ function uid() {
 
 // ---------- people ----------
 
-function addPerson() {
-  const el = document.getElementById('newPersonName');
-  const name = el.value.trim();
-  if (!name) return;
-  if (state.people.some(p => p.name === name)) { alert('同じ名前のメンバーが既にいます'); return; }
-  state.people.push({ id: uid(), name });
-  el.value = '';
-  save();
-  renderSettings();
-  render();
+function openPersonModal(id) {
+  editingPersonId = id || null;
+  const isEdit = !!id;
+  document.getElementById('personModalTitle').textContent = isEdit ? 'メンバーを編集' : 'メンバーを追加';
+  document.getElementById('personDeleteBtn').style.display = isEdit ? 'inline-flex' : 'none';
+  const p = isEdit ? state.people.find(p => p.id === id) : null;
+  document.getElementById('personName').value = p ? p.name : '';
+  document.getElementById('personAmount').value = p && p.amount ? p.amount : '';
+  document.getElementById('personModal').style.display = 'flex';
+  document.getElementById('personName').focus();
 }
 
-function removePerson(id) {
-  const used = (state.charges || []).some(c => c.personId === id);
-  if (used && !confirm('このメンバーの徴収額が存在します。削除しますか？')) return;
-  state.people = state.people.filter(p => p.id !== id);
-  state.charges = (state.charges || []).filter(c => c.personId !== id);
-  state.collected = (state.collected || []).filter(i => i !== id);
+function closePersonModal() {
+  document.getElementById('personModal').style.display = 'none';
+  editingPersonId = null;
+}
+
+function savePerson() {
+  const name = document.getElementById('personName').value.trim();
+  if (!name) { alert('名前を入力してください'); return; }
+  if (state.people.some(p => p.name === name && p.id !== editingPersonId)) {
+    alert('同じ名前のメンバーが既にいます'); return;
+  }
+  const amount = parseFloat(document.getElementById('personAmount').value) || 0;
+  if (editingPersonId) {
+    const p = state.people.find(p => p.id === editingPersonId);
+    if (p) Object.assign(p, { name, amount });
+  } else {
+    state.people.push({ id: uid(), name, amount, collected: false });
+  }
   save();
-  renderSettings();
-  render();
+  closePersonModal();
+}
+
+function deletePerson() {
+  if (!editingPersonId || !confirm('このメンバーを削除しますか？')) return;
+  state.people = state.people.filter(p => p.id !== editingPersonId);
+  save();
+  closePersonModal();
+}
+
+function toggleCollected(personId) {
+  const p = state.people.find(p => p.id === personId);
+  if (p) { p.collected = !p.collected; save(); }
 }
 
 // ---------- categories ----------
@@ -472,7 +525,6 @@ function addCategory() {
   el.value = '';
   save();
   renderSettings();
-  render();
 }
 
 function removeCategory(id) {
@@ -480,100 +532,90 @@ function removeCategory(id) {
   state.expenses.forEach(e => { if (e.categoryId === id) e.categoryId = ''; });
   save();
   renderSettings();
-  render();
 }
 
 function catColor(id) {
   const idx = state.categories.findIndex(c => c.id === id);
   return idx >= 0 ? CAT_COLORS[idx % CAT_COLORS.length] : '#ccc';
 }
-
 function catName(id) {
   const c = state.categories.find(c => c.id === id);
   return c ? c.name : '未分類';
 }
 
-// ---------- expenses ----------
-
-function expTotal(exp) {
-  return exp.amount || 0;
+function editCategory(id) {
+  editingCategoryId = id;
+  renderSettings();
+  const el = document.getElementById('editCat_' + id);
+  if (el) { el.focus(); el.select(); }
+}
+function saveCategoryEdit(id) {
+  const el = document.getElementById('editCat_' + id);
+  const name = el?.value.trim();
+  if (!name) { cancelCategoryEdit(); return; }
+  if (state.categories.some(c => c.name === name && c.id !== id)) {
+    alert('同じカテゴリが既にあります'); el.focus(); return;
+  }
+  const c = state.categories.find(c => c.id === id);
+  if (c) c.name = name;
+  editingCategoryId = null;
+  save();
+  renderSettings();
+}
+function cancelCategoryEdit() {
+  editingCategoryId = null;
+  renderSettings();
 }
 
+// ---------- expenses ----------
+
 function openExpenseModal(id) {
-  editingId = id || null;
+  editingExpenseId = id || null;
   document.getElementById('expenseModalTitle').textContent = id ? '経費を編集' : '経費を追加';
   document.getElementById('expenseName').value = '';
   document.getElementById('expenseAmount').value = '';
   document.getElementById('expenseDate').value = today();
-
   const sel = document.getElementById('expenseCategory');
   sel.innerHTML = '<option value="">未分類</option>' +
     state.categories.map(c => `<option value="${c.id}">${esc(c.name)}</option>`).join('');
-
   if (id) {
-    const exp = state.expenses.find(e => e.id === id);
-    if (exp) {
-      document.getElementById('expenseName').value = exp.name;
-      document.getElementById('expenseAmount').value = exp.amount || '';
-      document.getElementById('expenseDate').value = exp.date || '';
-      sel.value = exp.categoryId || '';
+    const e = state.expenses.find(e => e.id === id);
+    if (e) {
+      document.getElementById('expenseName').value = e.name;
+      document.getElementById('expenseAmount').value = e.amount || '';
+      document.getElementById('expenseDate').value = e.date || '';
+      sel.value = e.categoryId || '';
     }
   }
-
   document.getElementById('expenseModal').style.display = 'flex';
   document.getElementById('expenseName').focus();
 }
 
 function closeExpenseModal() {
   document.getElementById('expenseModal').style.display = 'none';
-  editingId = null;
+  editingExpenseId = null;
 }
 
 function saveExpense() {
   const name = document.getElementById('expenseName').value.trim();
   if (!name) { alert('項目名を入力してください'); return; }
-
   const categoryId = document.getElementById('expenseCategory').value;
   const date = document.getElementById('expenseDate').value;
   const amount = parseFloat(document.getElementById('expenseAmount').value) || 0;
-
-  if (editingId) {
-    const exp = state.expenses.find(e => e.id === editingId);
-    if (exp) Object.assign(exp, { name, categoryId, date, amount });
+  if (editingExpenseId) {
+    const e = state.expenses.find(e => e.id === editingExpenseId);
+    if (e) Object.assign(e, { name, categoryId, date, amount });
   } else {
     state.expenses.push({ id: uid(), name, categoryId, date, amount });
   }
-
   save();
   closeExpenseModal();
-  render();
 }
 
 function deleteExpense(id) {
   if (!confirm('この経費を削除しますか？')) return;
   state.expenses = state.expenses.filter(e => e.id !== id);
   save();
-  render();
-}
-
-// ---------- computations ----------
-
-function totalByCategory() {
-  const m = {};
-  state.expenses.forEach(e => {
-    const k = e.categoryId || '__none__';
-    m[k] = (m[k] || 0) + expTotal(e);
-  });
-  return m;
-}
-
-function totalByPerson() {
-  const m = {};
-  state.people.forEach(p => { m[p.id] = 0; });
-  (state.charges || []).forEach(c => {
-    m[c.personId] = (m[c.personId] || 0) + (c.amount || 0);
-  });
-  return m;
 }
 
 // ---------- render ----------
@@ -588,11 +630,10 @@ function render() {
 }
 
 function renderSummary() {
-  const totalExp = state.expenses.reduce((s, e) => s + expTotal(e), 0);
-  const totalCharge = (state.charges || []).reduce((s, c) => s + (c.amount || 0), 0);
+  const totalExp = state.expenses.reduce((s, e) => s + (e.amount || 0), 0);
+  const totalCharge = state.people.reduce((s, p) => s + (p.amount || 0), 0);
   const diff = totalCharge - totalExp;
   const diffColor = diff >= 0 ? '#27ae60' : '#e74c3c';
-  const diffSign = diff >= 0 ? '+' : '';
   document.getElementById('summaryGrid').innerHTML = `
     <div class="summary-card">
       <div class="summary-label">総経費</div>
@@ -604,7 +645,7 @@ function renderSummary() {
     </div>
     <div class="summary-card">
       <div class="summary-label">差額（徴収－経費）</div>
-      <div class="summary-value" style="color:${diffColor}">${diffSign}${fmt(diff)}</div>
+      <div class="summary-value" style="color:${diffColor}">${diff >= 0 ? '+' : ''}${fmt(diff)}</div>
     </div>
     <div class="summary-card">
       <div class="summary-label">経費件数</div>
@@ -615,306 +656,122 @@ function renderSummary() {
 
 function renderExpenseTable() {
   const container = document.getElementById('expenseTableContainer');
-  if (state.expenses.length === 0) {
+  if (!state.expenses.length) {
     container.innerHTML = '<div class="empty-state"><div class="icon">📋</div><p>経費がまだありません。「+ 追加」から登録してください。</p></div>';
     return;
   }
-
   const sorted = [...state.expenses].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-  const grand = sorted.reduce((s, e) => s + expTotal(e), 0);
-
+  const grand = sorted.reduce((s, e) => s + (e.amount || 0), 0);
   container.innerHTML = `
     <table>
-      <thead>
+      <thead><tr>
+        <th class="hide-mobile">日付</th><th>項目名</th><th>カテゴリ</th>
+        <th style="text-align:right">金額</th><th></th>
+      </tr></thead>
+      <tbody>${sorted.map(e => `
         <tr>
-          <th class="hide-mobile">日付</th>
-          <th>項目名</th>
-          <th>カテゴリ</th>
-          <th style="text-align:right">金額</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        ${sorted.map(e => {
-          const color = e.categoryId ? catColor(e.categoryId) : '#ccc';
-          return `
-            <tr>
-              <td class="hide-mobile" style="color:#aaa; font-size:12px; white-space:nowrap">${e.date || '—'}</td>
-              <td style="font-weight:500">${esc(e.name)}</td>
-              <td>
-                ${e.categoryId
-                  ? `<span class="badge"><span class="cat-dot" style="background:${color}"></span>${esc(catName(e.categoryId))}</span>`
-                  : '<span style="color:#ddd; font-size:12px">—</span>'}
-              </td>
-              <td class="amount-cell">${fmt(expTotal(e))}</td>
-              <td class="actions-cell">
-                <button class="btn-icon" onclick="openExpenseModal('${e.id}')" title="編集">✏</button>
-                <button class="btn-icon" onclick="deleteExpense('${e.id}')" title="削除">🗑</button>
-              </td>
-            </tr>
-          `;
-        }).join('')}
+          <td class="hide-mobile" style="color:#aaa;font-size:12px;white-space:nowrap">${e.date || '—'}</td>
+          <td style="font-weight:500">${esc(e.name)}</td>
+          <td>${e.categoryId
+            ? `<span class="badge"><span class="cat-dot" style="background:${catColor(e.categoryId)}"></span>${esc(catName(e.categoryId))}</span>`
+            : '<span style="color:#ddd;font-size:12px">—</span>'}</td>
+          <td class="amount-cell">${fmt(e.amount)}</td>
+          <td class="actions-cell">
+            <button class="btn-icon" onclick="openExpenseModal('${e.id}')" title="編集">✏</button>
+            <button class="btn-icon" onclick="deleteExpense('${e.id}')" title="削除">🗑</button>
+          </td>
+        </tr>`).join('')}
       </tbody>
-      <tfoot>
-        <tr>
-          <td class="hide-mobile"></td>
-          <td colspan="2" style="font-weight:700">合計</td>
-          <td class="amount-cell">${fmt(grand)}</td>
-          <td></td>
-        </tr>
-      </tfoot>
+      <tfoot><tr>
+        <td class="hide-mobile"></td><td colspan="2" style="font-weight:700">合計</td>
+        <td class="amount-cell">${fmt(grand)}</td><td></td>
+      </tr></tfoot>
     </table>
   `;
 }
 
 function renderCategoryTable() {
   const container = document.getElementById('categoryTableContainer');
-  const totals = totalByCategory();
-
-  const rows = [];
-  state.categories.forEach(c => {
-    rows.push({ name: c.name, amount: totals[c.id] || 0, color: catColor(c.id) });
+  const totals = {};
+  state.expenses.forEach(e => {
+    const k = e.categoryId || '__none__';
+    totals[k] = (totals[k] || 0) + (e.amount || 0);
   });
-  if (totals['__none__']) {
-    rows.push({ name: '未分類', amount: totals['__none__'], color: '#ccc' });
-  }
+  const rows = state.categories.map(c => ({ name: c.name, amount: totals[c.id] || 0, color: catColor(c.id) }));
+  if (totals['__none__']) rows.push({ name: '未分類', amount: totals['__none__'], color: '#ccc' });
   rows.sort((a, b) => b.amount - a.amount);
 
-  if (rows.length === 0) {
+  if (!rows.length) {
     container.innerHTML = '<div class="empty-state"><div class="icon">📊</div><p>カテゴリが登録されていません。設定から追加してください。</p></div>';
     return;
   }
-
   const grand = rows.reduce((s, r) => s + r.amount, 0);
-
   container.innerHTML = `
     <table>
-      <thead>
-        <tr>
-          <th>カテゴリ</th>
-          <th style="text-align:right">金額</th>
-          <th style="text-align:right">割合</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${rows.map(r => {
-          const pct = grand > 0 ? (r.amount / grand * 100) : 0;
-          return `
-            <tr>
-              <td><span class="cat-dot" style="background:${r.color}; margin-right:6px"></span>${esc(r.name)}</td>
-              <td class="amount-cell">${fmt(r.amount)}</td>
-              <td style="text-align:right; min-width:80px">
-                <span style="font-size:12px; color:#888">${pct.toFixed(1)}%</span>
-                <div class="pct-bar-wrap"><div class="pct-bar" style="width:${pct.toFixed(1)}%; background:${r.color}"></div></div>
-              </td>
-            </tr>
-          `;
-        }).join('')}
-      </tbody>
-      <tfoot>
-        <tr>
-          <td style="font-weight:700">合計</td>
-          <td class="amount-cell">${fmt(grand)}</td>
-          <td></td>
-        </tr>
-      </tfoot>
+      <thead><tr>
+        <th>カテゴリ</th><th style="text-align:right">金額</th><th style="text-align:right">割合</th>
+      </tr></thead>
+      <tbody>${rows.map(r => {
+        const pct = grand > 0 ? (r.amount / grand * 100) : 0;
+        return `<tr>
+          <td><span class="cat-dot" style="background:${r.color};margin-right:6px"></span>${esc(r.name)}</td>
+          <td class="amount-cell">${fmt(r.amount)}</td>
+          <td style="text-align:right;min-width:80px">
+            <span style="font-size:12px;color:#888">${pct.toFixed(1)}%</span>
+            <div class="pct-bar-wrap"><div class="pct-bar" style="width:${pct.toFixed(1)}%;background:${r.color}"></div></div>
+          </td>
+        </tr>`;
+      }).join('')}</tbody>
+      <tfoot><tr>
+        <td style="font-weight:700">合計</td><td class="amount-cell">${fmt(grand)}</td><td></td>
+      </tr></tfoot>
     </table>
   `;
 }
 
 function renderPeopleTable() {
-  renderPeopleSummary();
-  renderChargeList();
-}
-
-function renderPeopleSummary() {
-  const container = document.getElementById('peopleSummaryContainer');
-  if (state.people.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="icon">👥</div><p>設定からメンバーを追加してください。</p></div>';
+  const container = document.getElementById('peopleTableContainer');
+  if (!state.people.length) {
+    container.innerHTML = '<div class="empty-state"><div class="icon">👥</div><p>「+ 追加」からメンバーを登録してください。</p></div>';
     return;
   }
-
-  const totals = totalByPerson();
-  const collected = state.collected || [];
-  const rows = state.people.map(p => ({
-    id: p.id, name: p.name,
-    amount: totals[p.id] || 0,
-    done: collected.includes(p.id)
-  }));
-  rows.sort((a, b) => b.amount - a.amount);
-  const grand = rows.reduce((s, r) => s + r.amount, 0);
-  const collectedTotal = rows.filter(r => r.done).reduce((s, r) => s + r.amount, 0);
-
+  const grand = state.people.reduce((s, p) => s + (p.amount || 0), 0);
+  const collectedTotal = state.people.filter(p => p.collected).reduce((s, p) => s + (p.amount || 0), 0);
+  const uncollected = grand - collectedTotal;
   container.innerHTML = `
     <table>
-      <thead>
-        <tr>
-          <th style="width:36px; text-align:center">済</th>
-          <th>メンバー</th>
-          <th style="text-align:right">徴収合計</th>
-          <th style="text-align:right">割合</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${rows.map(r => {
-          const pct = grand > 0 ? (r.amount / grand * 100) : 0;
-          const fade = r.done ? 'opacity:0.45;' : '';
-          return `
-            <tr style="${fade}">
-              <td style="text-align:center">
-                <input type="checkbox" ${r.done ? 'checked' : ''}
-                  onchange="toggleCollected('${r.id}')"
-                  style="width:16px; height:16px; cursor:pointer; accent-color:#27ae60">
-              </td>
-              <td>
-                ${r.done
-                  ? `<span style="text-decoration:line-through; color:#aaa">${esc(r.name)}</span>
-                     <span style="font-size:11px; color:#27ae60; margin-left:6px; font-weight:500">徴収済</span>`
-                  : esc(r.name)}
-              </td>
-              <td class="amount-cell">${fmt(r.amount)}</td>
-              <td style="text-align:right; min-width:80px">
-                <span style="font-size:12px; color:#888">${pct.toFixed(1)}%</span>
-                <div class="pct-bar-wrap"><div class="pct-bar" style="width:${pct.toFixed(1)}%"></div></div>
-              </td>
-            </tr>
-          `;
-        }).join('')}
+      <thead><tr>
+        <th style="width:40px;text-align:center">済</th>
+        <th>名前</th>
+        <th style="text-align:right">徴収額</th>
+        <th></th>
+      </tr></thead>
+      <tbody>${state.people.map(p => `
+        <tr style="${p.collected ? 'opacity:0.5' : ''}">
+          <td style="text-align:center">
+            <input type="checkbox" ${p.collected ? 'checked' : ''}
+              onchange="toggleCollected('${p.id}')"
+              style="width:16px;height:16px;cursor:pointer;accent-color:#27ae60">
+          </td>
+          <td>
+            ${p.collected
+              ? `<span style="text-decoration:line-through;color:#aaa">${esc(p.name)}</span>
+                 <span style="font-size:11px;color:#27ae60;margin-left:6px;font-weight:500">徴収済</span>`
+              : `<span style="font-weight:500">${esc(p.name)}</span>`}
+          </td>
+          <td class="amount-cell">${fmt(p.amount)}</td>
+          <td class="actions-cell">
+            <button class="btn-icon" onclick="openPersonModal('${p.id}')" title="編集">✏</button>
+          </td>
+        </tr>`).join('')}
       </tbody>
       <tfoot>
-        <tr>
-          <td></td>
-          <td style="font-weight:700">合計</td>
-          <td class="amount-cell">${fmt(grand)}</td>
-          <td></td>
-        </tr>
-        ${collectedTotal > 0 ? `
-        <tr>
-          <td></td>
-          <td style="color:#27ae60; font-size:13px">徴収済み</td>
-          <td class="amount-cell" style="color:#27ae60; font-size:13px">${fmt(collectedTotal)}</td>
-          <td></td>
-        </tr>
-        ` : ''}
-        ${grand - collectedTotal > 0 ? `
-        <tr>
-          <td></td>
-          <td style="color:#e67e22; font-size:13px">未徴収</td>
-          <td class="amount-cell" style="color:#e67e22; font-size:13px">${fmt(grand - collectedTotal)}</td>
-          <td></td>
-        </tr>
-        ` : ''}
+        <tr><td></td><td style="font-weight:700">合計</td><td class="amount-cell">${fmt(grand)}</td><td></td></tr>
+        ${collectedTotal > 0 ? `<tr><td></td><td style="color:#27ae60;font-size:13px">徴収済み</td><td class="amount-cell" style="color:#27ae60;font-size:13px">${fmt(collectedTotal)}</td><td></td></tr>` : ''}
+        ${uncollected > 0 ? `<tr><td></td><td style="color:#e67e22;font-size:13px">未徴収</td><td class="amount-cell" style="color:#e67e22;font-size:13px">${fmt(uncollected)}</td><td></td></tr>` : ''}
       </tfoot>
     </table>
   `;
-}
-
-function toggleCollected(personId) {
-  if (!state.collected) state.collected = [];
-  const idx = state.collected.indexOf(personId);
-  if (idx >= 0) state.collected.splice(idx, 1);
-  else state.collected.push(personId);
-  save();
-  renderPeopleSummary();
-}
-
-function renderChargeList() {
-  const container = document.getElementById('chargeListContainer');
-  const charges = state.charges || [];
-  if (charges.length === 0) {
-    container.innerHTML = '<div class="empty-state"><div class="icon">💴</div><p>徴収額がまだありません。「+ 追加」から登録してください。</p></div>';
-    return;
-  }
-
-  const sorted = [...charges].sort((a, b) => (b.date || '').localeCompare(a.date || ''));
-  const grand = sorted.reduce((s, c) => s + (c.amount || 0), 0);
-
-  container.innerHTML = `
-    <table>
-      <thead>
-        <tr>
-          <th class="hide-mobile">日付</th>
-          <th>メンバー</th>
-          <th>内容</th>
-          <th style="text-align:right">金額</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        ${sorted.map(c => {
-          const p = state.people.find(p => p.id === c.personId);
-          return `
-            <tr>
-              <td class="hide-mobile" style="color:#aaa; font-size:12px; white-space:nowrap">${c.date || '—'}</td>
-              <td style="font-weight:500">${p ? esc(p.name) : '<span style="color:#ccc">削除済み</span>'}</td>
-              <td style="color:#888; font-size:13px">${c.label ? esc(c.label) : '—'}</td>
-              <td class="amount-cell">${fmt(c.amount)}</td>
-              <td class="actions-cell">
-                <button class="btn-icon" onclick="deleteCharge('${c.id}')" title="削除">🗑</button>
-              </td>
-            </tr>
-          `;
-        }).join('')}
-      </tbody>
-      <tfoot>
-        <tr>
-          <td class="hide-mobile"></td>
-          <td colspan="2" style="font-weight:700">合計</td>
-          <td class="amount-cell">${fmt(grand)}</td>
-          <td></td>
-        </tr>
-      </tfoot>
-    </table>
-  `;
-}
-
-// ---------- charges ----------
-
-let editingChargeId = null;
-
-function openChargeModal(id) {
-  editingChargeId = id || null;
-  document.getElementById('chargeModalTitle').textContent = '徴収額を追加';
-
-  const sel = document.getElementById('chargePersonId');
-  sel.innerHTML = state.people.length === 0
-    ? '<option value="">（設定からメンバーを追加してください）</option>'
-    : state.people.map(p => `<option value="${p.id}">${esc(p.name)}</option>`).join('');
-
-  document.getElementById('chargeAmount').value = '';
-  document.getElementById('chargeLabel').value = '';
-  document.getElementById('chargeDate').value = today();
-
-  document.getElementById('chargeModal').style.display = 'flex';
-  document.getElementById('chargeAmount').focus();
-}
-
-function closeChargeModal() {
-  document.getElementById('chargeModal').style.display = 'none';
-  editingChargeId = null;
-}
-
-function saveCharge() {
-  const personId = document.getElementById('chargePersonId').value;
-  if (!personId) { alert('メンバーを選択してください'); return; }
-  const amount = parseFloat(document.getElementById('chargeAmount').value) || 0;
-  if (amount <= 0) { alert('金額を入力してください'); return; }
-  const label = document.getElementById('chargeLabel').value.trim();
-  const date = document.getElementById('chargeDate').value;
-
-  if (!state.charges) state.charges = [];
-  state.charges.push({ id: uid(), personId, amount, label, date });
-
-  save();
-  closeChargeModal();
-  render();
-}
-
-function deleteCharge(id) {
-  if (!confirm('この徴収額を削除しますか？')) return;
-  state.charges = (state.charges || []).filter(c => c.id !== id);
-  save();
-  render();
 }
 
 // ---------- settings ----------
@@ -923,106 +780,28 @@ function openSettings() {
   renderSettings();
   document.getElementById('settingsModal').style.display = 'flex';
 }
-
 function closeSettings() {
   document.getElementById('settingsModal').style.display = 'none';
 }
-
 function renderSettings() {
-  document.getElementById('peopleTagList').innerHTML = state.people.length === 0
-    ? '<span style="color:#bbb; font-size:13px">まだいません</span>'
-    : state.people.map(p => {
-        if (editingPersonId === p.id) {
-          return `<span class="tag tag-editing">
-            <input id="editPerson_${p.id}" type="text" value="${esc(p.name)}"
-              onkeydown="if(event.key==='Enter') savePersonEdit('${p.id}'); if(event.key==='Escape') cancelPersonEdit()">
-            <button onclick="savePersonEdit('${p.id}')" title="保存">✓</button>
-            <button class="del" onclick="cancelPersonEdit()" title="キャンセル">✕</button>
-          </span>`;
-        }
-        return `<span class="tag">
-          ${esc(p.name)}
-          <button onclick="editPerson('${p.id}')" title="編集">✏</button>
-          <button class="del" onclick="removePerson('${p.id}')" title="削除">×</button>
-        </span>`;
-      }).join('');
-
-  document.getElementById('categoryTagList').innerHTML = state.categories.length === 0
-    ? '<span style="color:#bbb; font-size:13px">まだありません</span>'
+  document.getElementById('categoryTagList').innerHTML = !state.categories.length
+    ? '<span style="color:#bbb;font-size:13px">まだありません</span>'
     : state.categories.map(c => {
         if (editingCategoryId === c.id) {
           return `<span class="tag tag-editing">
             <input id="editCat_${c.id}" type="text" value="${esc(c.name)}"
               onkeydown="if(event.key==='Enter') saveCategoryEdit('${c.id}'); if(event.key==='Escape') cancelCategoryEdit()">
-            <button onclick="saveCategoryEdit('${c.id}')" title="保存">✓</button>
-            <button class="del" onclick="cancelCategoryEdit()" title="キャンセル">✕</button>
+            <button onclick="saveCategoryEdit('${c.id}')">✓</button>
+            <button class="del" onclick="cancelCategoryEdit()">✕</button>
           </span>`;
         }
         return `<span class="tag">
           <span class="cat-dot" style="background:${catColor(c.id)}"></span>
           ${esc(c.name)}
-          <button onclick="editCategory('${c.id}')" title="編集">✏</button>
-          <button class="del" onclick="removeCategory('${c.id}')" title="削除">×</button>
+          <button onclick="editCategory('${c.id}')">✏</button>
+          <button class="del" onclick="removeCategory('${c.id}')">×</button>
         </span>`;
       }).join('');
-}
-
-function editPerson(id) {
-  editingPersonId = id;
-  renderSettings();
-  const el = document.getElementById('editPerson_' + id);
-  if (el) { el.focus(); el.select(); }
-}
-
-function savePersonEdit(id) {
-  const el = document.getElementById('editPerson_' + id);
-  const name = el?.value.trim();
-  if (!name) { cancelPersonEdit(); return; }
-  if (state.people.some(p => p.name === name && p.id !== id)) {
-    alert('同じ名前のメンバーが既にいます');
-    el.focus();
-    return;
-  }
-  const p = state.people.find(p => p.id === id);
-  if (p) p.name = name;
-  editingPersonId = null;
-  save();
-  renderSettings();
-  render();
-}
-
-function cancelPersonEdit() {
-  editingPersonId = null;
-  renderSettings();
-}
-
-function editCategory(id) {
-  editingCategoryId = id;
-  renderSettings();
-  const el = document.getElementById('editCat_' + id);
-  if (el) { el.focus(); el.select(); }
-}
-
-function saveCategoryEdit(id) {
-  const el = document.getElementById('editCat_' + id);
-  const name = el?.value.trim();
-  if (!name) { cancelCategoryEdit(); return; }
-  if (state.categories.some(c => c.name === name && c.id !== id)) {
-    alert('同じカテゴリが既にあります');
-    el.focus();
-    return;
-  }
-  const c = state.categories.find(c => c.id === id);
-  if (c) c.name = name;
-  editingCategoryId = null;
-  save();
-  renderSettings();
-  render();
-}
-
-function cancelCategoryEdit() {
-  editingCategoryId = null;
-  renderSettings();
 }
 
 // ---------- data management ----------
@@ -1042,19 +821,13 @@ function importData(event) {
   reader.onload = e => {
     try {
       const data = JSON.parse(e.target.result);
-      if (!Array.isArray(data.people) || !Array.isArray(data.categories) || !Array.isArray(data.expenses))
-        throw new Error();
-      if (!Array.isArray(data.charges)) data.charges = [];
-      if (!Array.isArray(data.collected)) data.collected = [];
+      if (!Array.isArray(data.people) || !Array.isArray(data.expenses)) throw new Error();
       if (!confirm('現在のデータを上書きしますか？')) return;
-      state = data;
+      state = normalize(data);
       save();
-      render();
       renderSettings();
       alert('インポートしました');
-    } catch {
-      alert('ファイルの形式が正しくありません');
-    }
+    } catch { alert('ファイルの形式が正しくありません'); }
   };
   reader.readAsText(file);
   event.target.value = '';
@@ -1062,52 +835,36 @@ function importData(event) {
 
 function clearAllData() {
   if (!confirm('全てのデータを削除しますか？この操作は元に戻せません。')) return;
-  state = { people: [], categories: [], expenses: [], charges: [], collected: [] };
+  state = { people: [], categories: [], expenses: [] };
   save();
-  render();
   renderSettings();
 }
 
 // ---------- tabs ----------
 
 function switchTab(name) {
-  document.querySelectorAll('.tab-btn').forEach((btn, i) => {
-    btn.classList.toggle('active', ['expenses', 'categories', 'people'][i] === name);
-  });
-  document.querySelectorAll('.tab-panel').forEach(p => {
-    p.classList.toggle('active', p.id === 'tab-' + name);
-  });
+  const names = ['expenses', 'categories', 'people'];
+  document.querySelectorAll('.tab-btn').forEach((btn, i) => btn.classList.toggle('active', names[i] === name));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.toggle('active', p.id === 'tab-' + name));
 }
 
 // ---------- utils ----------
 
 function esc(s) {
-  return String(s)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
+  return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
+function today() { return new Date().toISOString().slice(0, 10); }
 
-function today() {
-  return new Date().toISOString().slice(0, 10);
-}
+// ---------- modal close on overlay click ----------
 
-// ---------- close modals on overlay click ----------
-
-document.getElementById('expenseModal').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeExpenseModal();
-});
-document.getElementById('chargeModal').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeChargeModal();
-});
-document.getElementById('settingsModal').addEventListener('click', e => {
-  if (e.target === e.currentTarget) closeSettings();
+['expenseModal','personModal','settingsModal'].forEach(id => {
+  document.getElementById(id).addEventListener('click', e => {
+    if (e.target === e.currentTarget) document.getElementById(id).style.display = 'none';
+  });
 });
 
 // ---------- init ----------
-load();
-render();
+initFirebase();
 </script>
 </body>
 </html>
