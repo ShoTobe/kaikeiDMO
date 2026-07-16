@@ -198,6 +198,12 @@
       .hide-mobile { display: none; }
       .summary-value { font-size: 18px; }
     }
+
+    /* 未ログイン時は編集系UIを非表示・無効化（書き込みはFirebaseルールでも拒否される） */
+    body:not(.is-admin) .admin-only { display: none !important; }
+    body:not(.is-admin) .admin-only-input { pointer-events: none; opacity: 0.55; }
+    .auth-control { display: flex; align-items: center; gap: 10px; }
+    .auth-email { font-size: 12px; color: rgba(255,255,255,0.75); }
   </style>
 </head>
 <body>
@@ -217,7 +223,12 @@
     <span id="syncDot" class="sync-dot" style="display:none" title="同期状態"></span>
     会計管理
   </h1>
-  <button class="btn btn-ghost btn-sm" onclick="openSettings()">設定</button>
+  <div class="auth-control">
+    <button class="btn btn-ghost btn-sm admin-only" onclick="openSettings()">設定</button>
+    <button class="btn btn-ghost btn-sm" id="loginBtn" onclick="openLoginModal()">🔒 ログイン</button>
+    <span class="auth-email" id="adminInfo" style="display:none"></span>
+    <button class="btn btn-ghost btn-sm" id="logoutBtn" style="display:none" onclick="logout()">ログアウト</button>
+  </div>
 </header>
 
 <div class="container">
@@ -234,7 +245,7 @@
     <div class="card">
       <div class="card-header">
         <span class="card-title">経費一覧</span>
-        <button class="btn btn-primary btn-sm" onclick="openExpenseModal()">+ 追加</button>
+        <button class="btn btn-primary btn-sm admin-only" onclick="openExpenseModal()">+ 追加</button>
       </div>
       <div id="expenseTableContainer"></div>
     </div>
@@ -253,7 +264,7 @@
     <div class="card">
       <div class="card-header">
         <span class="card-title">メンバー</span>
-        <button class="btn btn-primary btn-sm" onclick="openPersonModal(null)">+ 追加</button>
+        <button class="btn btn-primary btn-sm admin-only" onclick="openPersonModal(null)">+ 追加</button>
       </div>
       <div id="peopleTableContainer"></div>
     </div>
@@ -359,9 +370,34 @@
   </div>
 </div>
 
+<!-- Login Modal -->
+<div class="modal-overlay" id="loginModal" style="display:none">
+  <div class="modal" style="max-width:360px">
+    <div class="modal-header">
+      <h2>管理者ログイン</h2>
+      <button class="btn-icon" onclick="closeLoginModal()">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label class="form-label">メールアドレス</label>
+        <input type="email" id="loginEmail" placeholder="you@example.com" onkeydown="if(event.key==='Enter') doLogin()">
+      </div>
+      <div class="form-group">
+        <label class="form-label">パスワード</label>
+        <input type="password" id="loginPassword" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-secondary" onclick="closeLoginModal()">キャンセル</button>
+      <button class="btn btn-primary" onclick="doLogin()">ログイン</button>
+    </div>
+  </div>
+</div>
+
 <!-- Firebase SDK (compat) -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
 
 <script>
 // ===== Firebase 設定 =====
@@ -386,6 +422,7 @@ const CAT_COLORS = ['#3498db','#2ecc71','#e67e22','#9b59b6','#e74c3c','#1abc9c',
 // state.expenses: [{id, name, categoryId, date, amount}]
 let state = { people: [], categories: [], expenses: [] };
 let db = null;
+let auth = null;
 let editingExpenseId = null;
 let editingPersonId = null;
 let editingCategoryId = null;
@@ -394,7 +431,10 @@ let editingCategoryId = null;
 
 function initFirebase() {
   if (!FIREBASE_CONFIG.databaseURL) {
+    // Firebase未設定＝この端末のみのローカル保存。書き込み制限の意味がないのでログイン不要にする。
     document.getElementById('setupBanner').style.display = 'block';
+    document.querySelector('.auth-control').style.display = 'none';
+    document.body.classList.add('is-admin');
     loadLocal();
     render();
     return;
@@ -402,6 +442,7 @@ function initFirebase() {
   try {
     firebase.initializeApp(FIREBASE_CONFIG);
     db = firebase.database();
+    auth = firebase.auth();
 
     const dot = document.getElementById('syncDot');
     dot.style.display = 'inline-block';
@@ -418,12 +459,43 @@ function initFirebase() {
       dot.className = 'sync-dot error';
       dot.title = '同期エラー';
     });
+
+    auth.onAuthStateChanged(user => {
+      document.body.classList.toggle('is-admin', !!user);
+      document.getElementById('loginBtn').style.display = user ? 'none' : '';
+      document.getElementById('logoutBtn').style.display = user ? '' : 'none';
+      const info = document.getElementById('adminInfo');
+      info.style.display = user ? '' : 'none';
+      info.textContent = user ? user.email : '';
+      render();
+    });
   } catch (e) {
     console.error(e);
     document.getElementById('setupBanner').style.display = 'block';
     loadLocal();
     render();
   }
+}
+
+function openLoginModal() {
+  document.getElementById('loginModal').style.display = 'flex';
+  document.getElementById('loginEmail').focus();
+}
+function closeLoginModal() {
+  document.getElementById('loginModal').style.display = 'none';
+  document.getElementById('loginEmail').value = '';
+  document.getElementById('loginPassword').value = '';
+}
+function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  if (!auth) return;
+  auth.signInWithEmailAndPassword(email, password)
+    .then(() => closeLoginModal())
+    .catch(err => alert('ログイン失敗: ' + err.message));
+}
+function logout() {
+  if (auth) auth.signOut();
 }
 
 function normalize(data) {
@@ -459,7 +531,10 @@ function loadLocal() {
 
 function save() {
   if (db) {
-    db.ref(DB_PATH).set(state);
+    db.ref(DB_PATH).set(state).catch(err => {
+      alert('保存に失敗しました（ログインが必要です）: ' + err.message);
+      render();
+    });
   } else {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
     render();
@@ -468,6 +543,14 @@ function save() {
 
 function uid() {
   return Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+}
+
+function requireAdmin() {
+  if (!document.body.classList.contains('is-admin')) {
+    alert('この操作にはログインが必要です');
+    return false;
+  }
+  return true;
 }
 
 // ---------- people ----------
@@ -490,6 +573,7 @@ function closePersonModal() {
 }
 
 function savePerson() {
+  if (!requireAdmin()) return;
   const name = document.getElementById('personName').value.trim();
   if (!name) { alert('名前を入力してください'); return; }
   if (state.people.some(p => p.name === name && p.id !== editingPersonId)) {
@@ -507,6 +591,7 @@ function savePerson() {
 }
 
 function deletePerson() {
+  if (!requireAdmin()) return;
   if (!editingPersonId || !confirm('このメンバーを削除しますか？')) return;
   state.people = state.people.filter(p => p.id !== editingPersonId);
   save();
@@ -514,6 +599,7 @@ function deletePerson() {
 }
 
 function toggleCollected(personId) {
+  if (!requireAdmin()) { render(); return; }
   const p = state.people.find(p => p.id === personId);
   if (p) { p.collected = !p.collected; save(); }
 }
@@ -521,6 +607,7 @@ function toggleCollected(personId) {
 // ---------- categories ----------
 
 function addCategory() {
+  if (!requireAdmin()) return;
   const el = document.getElementById('newCategoryName');
   const name = el.value.trim();
   if (!name) return;
@@ -532,6 +619,7 @@ function addCategory() {
 }
 
 function removeCategory(id) {
+  if (!requireAdmin()) return;
   state.categories = state.categories.filter(c => c.id !== id);
   state.expenses.forEach(e => { if (e.categoryId === id) e.categoryId = ''; });
   save();
@@ -558,6 +646,7 @@ function editCategory(id) {
   if (el) { el.focus(); el.select(); }
 }
 function saveCategoryEdit(id) {
+  if (!requireAdmin()) return;
   const el = document.getElementById('editCat_' + id);
   const name = el?.value.trim();
   if (!name) { cancelCategoryEdit(); return; }
@@ -609,6 +698,7 @@ function closeExpenseModal() {
 }
 
 function saveExpense() {
+  if (!requireAdmin()) return;
   const name = document.getElementById('expenseName').value.trim();
   if (!name) { alert('項目名を入力してください'); return; }
   const categoryId = document.getElementById('expenseCategory').value;
@@ -626,6 +716,7 @@ function saveExpense() {
 }
 
 function deleteExpense(id) {
+  if (!requireAdmin()) return;
   if (!confirm('この経費を削除しますか？')) return;
   state.expenses = state.expenses.filter(e => e.id !== id);
   save();
@@ -692,7 +783,7 @@ function renderExpenseTable() {
             : '<span style="color:#ddd;font-size:12px">—</span>'}</td>
           <td>${pname ? `<span style="font-size:13px;color:#555">${esc(pname)}</span>` : '<span style="color:#ddd;font-size:12px">—</span>'}</td>
           <td class="amount-cell">${fmt(e.amount)}</td>
-          <td class="actions-cell">
+          <td class="actions-cell admin-only">
             <button class="btn-icon" onclick="openExpenseModal('${e.id}')" title="編集">✏</button>
             <button class="btn-icon" onclick="deleteExpense('${e.id}')" title="削除">🗑</button>
           </td>
@@ -766,7 +857,7 @@ function renderPeopleTable() {
       <tbody>${state.people.map(p => `
         <tr style="${p.collected ? 'opacity:0.5' : ''}">
           <td style="text-align:center">
-            <input type="checkbox" ${p.collected ? 'checked' : ''}
+            <input type="checkbox" class="admin-only-input" ${p.collected ? 'checked' : ''}
               onchange="toggleCollected('${p.id}')"
               style="width:16px;height:16px;cursor:pointer;accent-color:#27ae60">
           </td>
@@ -777,7 +868,7 @@ function renderPeopleTable() {
               : `<span style="font-weight:500">${esc(p.name)}</span>`}
           </td>
           <td class="amount-cell">${fmt(p.amount)}</td>
-          <td class="actions-cell">
+          <td class="actions-cell admin-only">
             <button class="btn-icon" onclick="openPersonModal('${p.id}')" title="編集">✏</button>
           </td>
         </tr>`).join('')}
@@ -832,6 +923,7 @@ function exportData() {
 }
 
 function importData(event) {
+  if (!requireAdmin()) { event.target.value = ''; return; }
   const file = event.target.files[0];
   if (!file) return;
   const reader = new FileReader();
@@ -851,6 +943,7 @@ function importData(event) {
 }
 
 function clearAllData() {
+  if (!requireAdmin()) return;
   if (!confirm('全てのデータを削除しますか？この操作は元に戻せません。')) return;
   state = { people: [], categories: [], expenses: [] };
   save();
@@ -874,7 +967,7 @@ function today() { return new Date().toISOString().slice(0, 10); }
 
 // ---------- modal close on overlay click ----------
 
-['expenseModal','personModal','settingsModal'].forEach(id => {
+['expenseModal','personModal','settingsModal','loginModal'].forEach(id => {
   document.getElementById(id).addEventListener('click', e => {
     if (e.target === e.currentTarget) document.getElementById(id).style.display = 'none';
   });
